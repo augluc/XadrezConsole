@@ -10,18 +10,27 @@ namespace xadrez_console
         {
             try
             {
+                PartidaXadrez partida = new PartidaXadrez();
 
-            Tabuleiro tab = new Tabuleiro(8, 8);
+                while (!partida.Terminada)
+                {
+                    Console.Clear();
 
-            tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0, 0));
-            tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(1, 3));
-            tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(2, 4));
-            tab.ColocarPeca(new Rei(tab, Cor.Branca), new Posicao(6, 4));
-            tab.ColocarPeca(new Torre(tab, Cor.Branca), new Posicao(7, 0));
-            tab.ColocarPeca(new Torre(tab, Cor.Branca), new Posicao(7, 5));
-            tab.ColocarPeca(new Torre(tab, Cor.Branca), new Posicao(7, 7));
+                    Tela.ImprimirTabuleiro(partida.Tab);
 
-            Tela.ImprimirTabuleiro(tab);
+                    Console.WriteLine();
+
+                    Console.Write("Origem: ");
+                    Posicao origem = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    Console.Write("Destino: ");
+                    Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
+
+                    partida.ExecutaMovimento(origem, destino);
+
+                }
+
+                Tela.ImprimirTabuleiro(partida.Tab);
             }
             catch (TabuleiroException e)
             {
